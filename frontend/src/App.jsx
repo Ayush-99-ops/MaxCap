@@ -1,24 +1,32 @@
-import { useState } from 'react'
+import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
+import Landing from './pages/Landing';
+import Dashboard from './pages/Dashboard';
+import Tutorials from './pages/Tutorials';
+import CodeEditor from './pages/CodeEditor';
 
 function App() {
   return (
-    <div className="app-container">
-      <header className="navbar">
-        <div className="logo">MaxCap Learning</div>
-        <nav>
-          <a href="#">Tutorials</a>
-          <a href="#">Leaderboard</a>
-          <a href="#">Forum</a>
-          <a href="#" className="btn-primary">Sign In</a>
-        </nav>
-      </header>
-      <main className="hero-section">
-        <h1>Master Coding with Interactive Real-Time Feedback</h1>
-        <p>Join thousands of developers leveling up their skills in Python, JavaScript, and Web Development.</p>
-        <button className="btn-primary mt-4">Start Coding Now</button>
-      </main>
-    </div>
-  )
+    <Router>
+      <div className="app-container">
+        <header className="navbar">
+          <Link to="/" className="logo">MaxCap Learning</Link>
+          <nav>
+            <Link to="/tutorials">Tutorials</Link>
+            <Link to="/dashboard">Dashboard</Link>
+            <a href="#">Forum</a>
+            <Link to="/dashboard" className="btn-primary">Sign In</Link>
+          </nav>
+        </header>
+
+        <Routes>
+          <Route path="/" element={<Landing />} />
+          <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/tutorials" element={<Tutorials />} />
+          <Route path="/editor/:lessonId" element={<CodeEditor />} />
+        </Routes>
+      </div>
+    </Router>
+  );
 }
 
-export default App
+export default App;
